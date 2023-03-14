@@ -16,9 +16,11 @@ namespace WindowsFormsApp2
         public Form1()
         {
             InitializeComponent();
-            LaunchCommandLineApp();
+           LaunchCommandLineApp();
+         //   ConvertEBMtoMP4();
         }
 
+        // ffmpeg -i input.webm -c copy output.mp4
 
         /// <summary>
         /// Launch the application with some options set.
@@ -35,7 +37,35 @@ namespace WindowsFormsApp2
             startInfo.UseShellExecute = false;
             startInfo.FileName = "yt-dlp.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = "https://youtu.be/-TqQk5CfQBI";
+            startInfo.Arguments = " -f mp4 https://youtu.be/-TqQk5CfQBI";
+
+            try
+            {
+                // Start the process with the info we specified.
+                // Call WaitForExit and then the using statement will close.
+                using (Process exeProcess = Process.Start(startInfo))
+                {
+                    exeProcess.WaitForExit();
+                }
+            }
+            catch
+            {
+                // Log error.
+            }
+        }
+
+        static void ConvertEBMtoMP4()
+        {
+            // For the example
+   
+
+            // Use ProcessStartInfo class
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.CreateNoWindow = false;
+            startInfo.UseShellExecute = false;
+            startInfo.FileName = "ffmpeg.exe";
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.Arguments = " -i myvideo.webm  output.mp4";
 
             try
             {
