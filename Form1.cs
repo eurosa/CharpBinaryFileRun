@@ -29,13 +29,35 @@ namespace WindowsFormsApp2
         {
      
             // Use ProcessStartInfo class
-            ProcessStartInfo startInfo = new ProcessStartInfo();
+            /*ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.CreateNoWindow = false;
             startInfo.UseShellExecute = false;
             startInfo.FileName = "yt-dlp.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.RedirectStandardOutput = true;
             //startInfo.Verb = "runas";
-            startInfo.Arguments = " https://youtu.be/UggslfShToQ?list=RDUggslfShToQ&t=118 -f mp4 -P E:\\MyVideo";
+            startInfo.Arguments = " https://youtu.be/UggslfShToQ?list=RDUggslfShToQ&t=118 -f mp4 -P E:\\MyVideo  ";
+
+            */
+            var proc = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "yt-dlp.exe",
+                    Arguments = "https://youtu.be/UggslfShToQ?list=RDUggslfShToQ&t=118 -f mp4 -P E:\\MyVideo ",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = false
+                }
+            };
+
+            proc.Start();
+            while (!proc.StandardOutput.EndOfStream)
+            {
+                string line = proc.StandardOutput.ReadLine();
+                Debug.WriteLine("my_line: "+line);
+                // do something with line
+            }
 
             /*
             * var worker = sender as BackgroundWorker;
@@ -44,15 +66,16 @@ namespace WindowsFormsApp2
                 ParseSingleFile(); // pass filename here
                 int percentage = (i + 1) * 100 / filesCount;
                 worker.ReportProgress(percentage);  // use not myBGWorker but worker from sender
+                
             }*/
             try
             {   
                 // Start the process with the info we specified.
                 // Call WaitForExit and then the using statement will close.
-                using (Process exeProcess = Process.Start(startInfo))
+              /*  using (Process exeProcess = Process.Start(startInfo))
                 {
                     exeProcess.WaitForExit();
-                }
+                }*/
             }
             catch
             {
