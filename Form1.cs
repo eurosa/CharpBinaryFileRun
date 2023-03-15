@@ -37,8 +37,8 @@ namespace WindowsFormsApp2
             //startInfo.Verb = "runas";
             startInfo.Arguments = " https://youtu.be/UggslfShToQ?list=RDUggslfShToQ&t=118 -f mp4 -P E:\\MyVideo";
 
-           /*
-           * var worker = sender as BackgroundWorker;
+            /*
+            * var worker = sender as BackgroundWorker;
             for (int i = 0; i < filesCount; i++)
             {
                 ParseSingleFile(); // pass filename here
@@ -46,7 +46,7 @@ namespace WindowsFormsApp2
                 worker.ReportProgress(percentage);  // use not myBGWorker but worker from sender
             }*/
             try
-            {
+            {   
                 // Start the process with the info we specified.
                 // Call WaitForExit and then the using statement will close.
                 using (Process exeProcess = Process.Start(startInfo))
