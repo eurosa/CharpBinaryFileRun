@@ -48,7 +48,7 @@ namespace WindowsFormsApp2
                     Arguments = "https://youtu.be/UggslfShToQ?list=RDUggslfShToQ&t=118 -f mp4 -P E:\\MyVideo ",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
-                    CreateNoWindow = false
+                    CreateNoWindow = true
                 }
             };
 
@@ -58,16 +58,24 @@ namespace WindowsFormsApp2
             while (!proc.StandardOutput.EndOfStream)
             {
                 string line = proc.StandardOutput.ReadLine();
-                Debug.WriteLine("my_line: "+line); // +++++++++++++++++++++++++ ASDFGHJKLMNOPQRST1234567890 ++++++++++++++++++++++++++++++++++++++++++++ //
+                Debug.WriteLine("my_line: "+line); // +++++++++++++++++++++++++ ASDFGHJKLMNOPQRST1234567890 ++++++++++++++++++++++++++++++++++++++++++++ // 
+                string[] ssize = line.Split(null); //Or myStr.Split()
+                if (ssize.Length>=5) {
+                    if (ssize[0].Equals("[download]") && ssize[1].Equals("100%")) {
+                        Debug.WriteLine(" size " + ssize[5]);
+                       // Debug.WriteLine("splitted:0 " + ssize[0] + " 1 " + ssize[1] + "  2  " + ssize[2] + "  3  " + ssize[3] + " 4 " + ssize[4] + " size " + ssize[5]); // +++++++++++++++++++++++++ ASDFGHJKLMNOPQRST1234567890 ++++++++++++++++++++++++++++++++++++++++++++ // 
+                    }
+                    }
                 // do something with line
             }
-            //    GetInformationAsync("https://youtu.be/UggslfShToQ?list=RDUggslfShToQ&t=118");
+            // GetInformationAsync("https://youtu.be/UggslfShToQ?list=RDUggslfShToQ&t=118");
 
 
             /*
             * var worker = sender as BackgroundWorker;
             for (int i = 0; i < filesCount; i++)
             {
+
                 ParseSingleFile(); // pass filename here
                 int percentage = (i + 1) * 100 / filesCount;
                 worker.ReportProgress(percentage);  // use not myBGWorker but worker from sender
