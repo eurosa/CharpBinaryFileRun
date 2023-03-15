@@ -99,6 +99,7 @@ namespace WindowsFormsApp2
             var title = video.Title; // "Collections - Blender 2.80 Fundamentals"
             var author = video.Author.ChannelTitle; // "Blender"
             var duration = video.Duration; // 00:07:20
+            //var size = video.Size; // 00:07:20
 
             Debug.WriteLine("title:" + title +" author"+author+" Duration"+ duration);
         }
