@@ -27,10 +27,7 @@ namespace WindowsFormsApp2
         /// </summary>
         static void LaunchCommandLineApp()
         {
-            // For the example
-            const string ex1 = "C:\\";
-            const string ex2 = "C:\\Dir";
-
+     
             // Use ProcessStartInfo class
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.CreateNoWindow = false;
@@ -39,6 +36,13 @@ namespace WindowsFormsApp2
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             //startInfo.Verb = "runas";
             startInfo.Arguments = " https://youtu.be/UggslfShToQ?list=RDUggslfShToQ&t=118 -f mp4 -P E:\\MyVideo";
+
+           /* for (int i = 0; i < filesCount; i++)
+            {
+                ParseSingleFile(); // pass filename here
+                int percentage = (i + 1) * 100 / filesCount;
+                myBGWorker.ReportProgress(percentage);
+            }*
 
             try
             {
