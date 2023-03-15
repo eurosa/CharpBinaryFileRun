@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using YoutubeExplode;
 
 namespace WindowsFormsApp2
 {
@@ -25,7 +26,7 @@ namespace WindowsFormsApp2
         /// <summary>
         /// Launch the application with some options set.
         /// </summary>
-        static void LaunchCommandLineApp()
+        public void LaunchCommandLineApp()
         {
      
             // Use ProcessStartInfo class
@@ -51,6 +52,8 @@ namespace WindowsFormsApp2
                 }
             };
 
+            GetInformationAsync("https://youtu.be/UggslfShToQ?list=RDUggslfShToQ&t=118");
+
             proc.Start();
             while (!proc.StandardOutput.EndOfStream)
             {
@@ -58,6 +61,8 @@ namespace WindowsFormsApp2
                 Debug.WriteLine("my_line: "+line);
                 // do something with line
             }
+           
+
 
             /*
             * var worker = sender as BackgroundWorker;
@@ -83,6 +88,20 @@ namespace WindowsFormsApp2
             }
         }
 
+        public async Task GetInformationAsync(string url) {
+
+            var youtube = new YoutubeClient();
+
+            // You can specify either the video URL or its ID
+            var videoUrl = url;
+            var video = await youtube.Videos.GetAsync(videoUrl);
+
+            var title = video.Title; // "Collections - Blender 2.80 Fundamentals"
+            var author = video.Author.ChannelTitle; // "Blender"
+            var duration = video.Duration; // 00:07:20
+
+            Debug.WriteLine("title:" + title +" author"+author+" Duration"+ duration);
+        }
         static void ConvertEBMtoMP4()
         {
             // For the example
