@@ -42,7 +42,7 @@ namespace WindowsFormsApp2
                 ParseSingleFile(); // pass filename here
                 int percentage = (i + 1) * 100 / filesCount;
                 myBGWorker.ReportProgress(percentage);
-            }*
+            }*/
 
             try
             {
